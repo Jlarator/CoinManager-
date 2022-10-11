@@ -1,0 +1,75 @@
+  
+
+public JPanel makeTradingPanel(String[] args, String sideText){
+	
+	//0  greenMattBorder; 
+	//1   sellStopPriceField; 
+	//2  SellSizeField 
+	//3  SellLimitField	
+	//4  quoteSellStimateLabel
+
+	JPanel backGround = new JPanel(); 
+	backGround.setlayout(new BoxLayout(backGround, BoxLayout.Y_AXIS));
+	backGround.setBorder(BorderFactory.createTitledBorder(args[0], marginText, 
+	TitledBorder.CENTER, TitledBorder.CENTER)); 
+
+	
+	String[] stopTypes = {"loss", "entry"}; 
+
+	JLabel stopTypeLabel = new JLabel("Stop type:"); 
+	JComboBox stopSelect = new JComboBox(stopTypes); 
+	stopSelect.setSeletedIndex(0); 
+	stopSelect.addActionListener(this);
+	JLabel stopPriceLabel = new JLabel("Stop price: "); 
+	
+	args[1] = new numberTextField("0.00", 15, this); // sellStopPriceField
+	args[1].setName(sideText + " stop price"); 	
+	
+	// Top widgets
+
+	JPanel topWidgets = new JPanel(); 
+	topWidgets.add(stopTypeLabel); 
+	topWidgets.add(stopSelect); 
+	topWidgets.add(stopPricelabel); 
+	topWidgets.add(args[1]); 
+
+	//middle widgets
+	JLabel sizeLabel = new JLabel("Size"); 
+ 	args[2] = new numberTextField("0", 15, this); // SellSizeField
+	args[2].setActionCommad(sideText + "SizeField"); 
+	args[2].setName(sideText + ":" + sideText + " Field");
+	args[2].getDocument().addDocumentLIstener(this); 
+	args[2].addActionListener(this); 
+	
+	JLabel limitLabel = new JLabel("Limit cost"); 
+	args[3] = new numberTextField("0", 15, this); // SellLimitField
+	args[3].setActionCommand(sideText + "SizeField"); 
+	args[3].setName(sideText + ":Size Field"); 
+	args[3].getDocument().addDocumentListener(this); 
+	args[3].addActionListener(this); 
+
+	JLabel quoteLabel = new JLabel("Est. cost"); 
+	args[4] = new JLabel(format("[l8]", "0.00"));  // quoteStimateLabel
+
+	JPanel middleWidgets = new JPanel(); 
+	middleWidgets.add(sizeLabel); 
+	middleWidgets.add(args[2]); 
+	middleWIdgets.add(limitLabel); 
+	middleWidgets.add(args[3]); 
+	middleWidgets.add(quoteLabel); 
+	middleWidgets.add(args[4]); 
+
+	// Bottom widgets
+
+	JPanel bottomWidgets = new JPanel(); 
+	JButton placeOrderButton = new JButton("Place " + sideText + " Order"); 
+	placeOrderButton.addActionListener(this); 
+	
+	bottomSellWidgets.add(placeOrderButton); 
+
+	backGround.add(topWidgets); 
+	backGround.add(mittleWidgets); 
+	backGround.add(bottomWidgets); 
+
+	return backGround; 
+}	
